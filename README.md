@@ -52,72 +52,22 @@ The second dataset can be obtained [here](https://www.usclimatedata.com/climate/
 
 
 
-## Flights departing NYC in 2013
+## A Data-Driven Approach to Bank Telemarketing 
 
 ### Keywords
-airline, travel, delay, time, plane, weather
+consumer data, banking, telemarketing, wealth, status
 
 ### Summary
-A collection of datasets giving information about all flights departing NYC in 2013,
-the airports, airlines, planes, and even the weather. Thus there is information
-on what type of plane (and engine) departed what airport at what time and whether it
-was on time leaving/arriving, as well as the weather conditions.
+A collection of datasets that provides data that is related to a direct marketing campaign launched
+by the Portuguese Banking Institute. Within the data set contains customer data and whether the product
+was successfully subscribed or not. It may be possible to try and determine which factors are in play 
+here with the willingness of the consumer to accept the product based on their age, income or maritial status. 
 
-### What I love about it
-This is a great dataset that's available as an R package. Do not think that such
-easy availability makes this a poor choice; it's a great choice that allows you to
-get started on your project without getting bogged down by unavailable data. It is a rich
-dataset that captures a wide variety of parameters and offers lots of scope for
-adding value by joining data from different data frames.
+### Why pick this topic
+This topic is related to business and consumer research. Once a conclusion as to how to connect with the 
+customer is found, it may be applied to a different field. The data processing method is also important in this 
+case. The perks of this topic is the data set is quite complete and only requires one click to download.
 
 ### How do I get it?
-The data is available as an R package from 
-[CRAN](https://cran.r-project.org/web/packages/nycflights13/index.html).
-Now, the tailnumbers of the flights are given, but the information about the planes
-seems to be a subset of what is available from the 
-[FAA](https://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/).
-The downloadable FAA data, for example, also includes data about the plane's home 
-location, which I don't think is included in the R package data. This second source
-of data provides scope for the more adventurous to explore further. Does the
-population of plane types that use NYC match the general population in the FAA
-database? Is there anything surprising about the registered addresses of the planes
-that use NYC? (I don't know...)
-
-
-
-
-
-## UK Environment Agency Water Quality Archive 
-
-### Keywords
-environment, water, quality, EA open datasets
-
-### Summary
-Data on water quality measurements around England. Sample points can be coastal, estuarine waters,
-rivers, lakes, canals or groundwaters. Data from years 2000 onwards are available. A large number
-of water quality parameters are provided along, for example, the sample locations name and
-position, and date of course. The purpose of the sample is also given.
-
-### What I love about it
-Firstly, the documentation available is excellent. I commend the EA for this. Note that it's
-open data, but they do request you acknowledge the source if you use the data (well it would
-only be polite). Note also that there's an API *but I recommend you don't use this*. The reason
-is that there are CSV files available that are really easy to download and start using and ideal
-for a capstone project. You can pick a region and a year, download the file, and you're off. There's
-plenty of scope for demonstrating data wrangling because, for example
-
-* different quality parameters are provided for different purposes
-* the data format is just begging to be made "wide"
-
-What locations would you select? What patterns can you see over time? Can you infer any relationships
-between the various water quality parameters? If you nail this and get bored, can you find any local
-historic weather data (e.g. rainfall) to join with it? If you have an environmental interest, this
-could be a great selection of data.
-
-One sneaky hint that I use myself is that the download data have location in easting and northing and
-this gives you a really easy way to just plot locations as x and y in a scatter plot to essentially
-get a geographic plan view! 
-
-### How do I get it?
-The download page is [here](http://environment.data.gov.uk/water-quality/view/download#).
-It's really easy to navigate to the [Documentation](http://environment.data.gov.uk/water-quality/view/doc/reference).
+The documentation for the first dataset is [here](http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
+And is downloadable under data folder. 
