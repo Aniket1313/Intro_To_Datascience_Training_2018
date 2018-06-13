@@ -1,6 +1,6 @@
 # Data sets
 
-## Researching the opiod crisis - Accidental Drug Related Deaths in Connecticut from 2012 to 2017
+## Researching the Opiod Crisis - Accidental Drug Related Deaths in Connecticut from 2012 to 2017
 
 ### Keywords
 medical, drug usage, opioids
