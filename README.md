@@ -6,43 +6,49 @@
 medical, drug usage, opioids
 
 ### Summary
-A listing of each accidental death associated with drug overdose in Connecticut from 2012 to June 2017. 
-Data are derived from an investigation by the Office of the Chief Medical Examiner which includes the toxicity report, death certificate, as well as a scene investigation. Out of the 4000 recorded deaths casued by drug usage,
-Is there a common pattern to be found in terms of drug kind, age or even location.
+The dataset contains information regarding each accidental death associated with drug overdose in 
+Connecticut from 2012 to June 2017. The data was derived from an investigation by the Office of the 
+Chief Medical Examiner which includes the toxicity report, death certificate, as well as a scene investigation. 
+The set includes information such as Date, Sex, Race, Age, Location with the type of drug used either in
+single usage or multiple combinations.
 
 ### Why pick this topic
-write a sentence in the form of "X is an interesting problem to solve because Y". 
-This should cover not only what the problem is, but also why it's important and who cares about it.
+The topic may provide important insight as to what drug or what combination of drugs are the leading 
+cause of accidental death in connecticut and how age or gender may play in part in the cause of death.
+The data set contains over 4000 records, but does not contain any numerical variables apart from age,
+which might be a shortcoming in gaining better insight. 
 
 
 ### How do I get it?
-The page for the paper is [here](https://catalog.data.gov/dataset/accidental-drug-related-deaths-january-2012-sept-2015)
+The documentation for the dataset is [here](https://catalog.data.gov/dataset/accidental-drug-related-deaths-january-2012-sept-2015)
 and the link to the data download is under "Downloads & Resources".
 
 
 
-## DOTA2 online game statistics
+## Crop Yields and Weather - State of NY
 
 ### Keywords
-online game, MOBA, player, match, skill
+Weather, Climate, Crop Yields, Principal Crops
 
 ### Summary
-A dataset containing 50000 matches from the online game Dota2. The data details which team won,
-which heroes (characters) were in the teams, which player ID was playing, match duration,
-parameters such as how many times a player/character killed and died and many other features.
+This dataset requires the combination of two different data sources. The first set being crop yields
+which highlights the annual production of crops dating back to the 1990s. The second data set contains
+weather data for each state. But we will mostly be focusing our effort on NY. 
 
-### What I love about it
-I've actually seen this turned into a great capstone project analysis. There is scope for
-analysing the characteristics of the different heroes, interactions between them, matches,
-and much more. All data are readily available in a
-single download, but over multiple files, allowing plenty of scope to add value by joining
-data from different files on common fields. 
+### Why pick this topic
+This data will help us understand how weather affects crops and show if there is a declining or increasing
+trend on crop production in correlation with the climate change. 
+
+Downloading this data set will be a challenge as there are no visible API for both data sources at the
+moment and the data is spread out. Some web scraping might make it easier to obtain data from the second
+site, but more likely building the entire data set will require a lot of manual copy and pasting.
 
 ### How do I get it?
-The data are hosted on kaggle [here](https://www.kaggle.com/devinanzelmo/dota-2-matches).
-Whilst kaggle links often make us roll our eyes, this is one of those times when it's used
-to host a really interesting data set rather than a typical kaggle data set of "training.csv"
-and "test.csv".
+The documentation for the first dataset is [here](https://usda.mannlib.cornell.edu/MannUsda/viewDocumentInfo.do?documentID=1047)
+and the link to the data download is under "Latest Releases:".
+
+The second dataset can be obtained [here](https://www.usclimatedata.com/climate/addison/alabama/united-states/usal0586)
+
 
 
 
