@@ -1,0 +1,92 @@
+---
+title: "Project: Data Wrangling Exercise 1: Basic Data Manipulation"
+input_file: "refine.csv"
+output_file: "refine_clean.csv"
+---
+
+##0: Load the data in RStudio and View it
+```{r}
+library(readxl)
+refine <- read_excel("C:/Users/.../Desktop/refine.xlsx")
+View(refine)
+```
+
+##1: Clean up brand names
+```{r}
+#lowercase all brand names
+library(dplyr)
+refine$company <- refine$company %>% lapply(function(x) {
+  if (is.character(x)) return(tolower(x))
+  else return(x)
+})
+
+#use the patterns of beginning and ending letters of brands and have them corrected/replaced
+pattern.list<-c(".*\\ps$","^ak.*","^u.*","^v.*")
+replace.list<-c("philips","akzo","unilever","van houten")
+for (i in 1:length(pattern.list)) { 
+  refine$company <- gsub(pattern.list[i], replace.list[i], refine$company)
+  i=i+1
+  }
+```
+
+##2: Separate product code and number
+```{r}
+library(tidyr)
+refine <- refine %>% separate (`Product code / number`, c("product_code", "product_number"), sep = "-")
+```
+
+##3: Add product categories
+```{r}
+# p = Smartphone , v = TV, x = Laptop, q = Tablet
+
+
+refine <- refine %>% mutate(product_category = product_code)
+refine$product_category <- tolower(refine$product_category)
+pattern.list <- c("p","v","x","q")
+replace.list <- c("Smartphone","TV","Laptop","Tablet")
+for (i in 1:length(pattern.list)) { 
+  refine$product_category <- gsub(pattern.list[i], replace.list[i], refine$product_category)
+  i=i+1
+}
+
+refine$product_category <- gsub(paste0("[^", paste(replace.list, collapse=""), "]+"), "NA", refine$product_category)
+```
+
+##4: Add full address for geocoding
+```{r}
+refine <- refine %>% 
+  mutate(full_address = paste(address, city, country, sep = ","))
+```
+
+##5: Create dummy variables for company and product category
+```{r}
+
+#return numeric value for TRUE FALSE
+dummy_var <- function(x, pattern) {
+  ifelse((x == pattern),1,0)
+}
+
+brand <- c("philips", "akzo", "van houten", "unilever")
+
+for(i in brand) {
+  column_n <- paste("company", i, sep = "_")
+  refine[[column_n]] <- dummy_var(refine$company, i)
+}
+
+str(refine)
+colnames(refine)[12]<-"company_van_houten"
+
+#product category: smartphone, tv, laptop, tablet
+types <- levels(factor(refine$product_category))
+
+for(x in types) {
+  column_x <- paste("product", tolower(x), sep="_")
+  refine[[column_x]] <- dummy_var(refine$product_category, x)
+}
+```
+
+##6: Submit the project on Github
+```{r}
+#Export results to csv file
+write.csv(refine,"refine_clean.csv")
+```
