@@ -1,0 +1,59 @@
+---
+title: "Project: Data Wrangling Exercise 2: Dealing with missing values"
+input_file: "titanic_original.csv""
+output_file: "titanic_clean.csv"
+---
+
+##0: Load the data in RStudio
+```{r}
+library(readr)
+titanic_original <- read_csv("C:/Users/.../Desktop/titanic_original.csv")
+View(titanic_original)
+```
+
+##1: Port of embarkation
+```{r}
+summary(is.na(titanic_original$age))
+replace<-function(x){ 
+  x[is.na(x)] <- "S"; x 
+}
+
+titanic_original$embarked <- replace(titanic_original$embarked)
+
+summary(is.na(titanic_original$embarked))
+```
+
+##2: Age
+```{r}
+summary(is.na(titanic_original$age))
+average_age <- mean(titanic_original$age, na.rm = TRUE)
+hist(titanic_original$age)
+#results show a right skewed distribution, so it's better to use median
+median_age <- median(titanic_original$age, na.rm = TRUE)
+titanic_original$age[is.na(titanic_original$age)] <- median_age
+summary(is.na(titanic_original$age))
+```
+
+##3: Lifeboat
+```{r}
+library(dplyr)
+pivot <- titanic_original %>% 
+  group_by(boat) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+View(pivot)
+titanic_original$boat[is.na(titanic_original$boat)] <- "None"
+summary(is.na(titanic_original$boat))
+```
+
+##4: Cabin
+```{r}
+dummy_var <- function(x) {
+  ifelse(is.na(x),0,1)
+}
+
+titanic_original[["has_cabin_number"]] <- dummy_var(titanic_original$cabin)
+```
+
+##5: Submit the project on Github
+write.csv(titanic_original,"titanic_clean.csv")
