@@ -47,7 +47,9 @@ lapply(c("age", "contact_times"),
     hist(bank_full[[x]],xlab = x, main = x)
   })
 
-#based on the info displayed in the plots, we should remove outliers for age which is below 20 and above 80. Contact_times that exceed 10 times should also be removed from the data set rows.Unknown job positions can be removed as well
+#based on the info displayed in the plots, we should remove outliers for age which is below 20 
+and above 80. Contact_times that exceed 10 times should also be removed from the data set rows.
+Unknown job positions can be removed as well
 
 library(dplyr)
 bank_full <- bank_full %>% 
