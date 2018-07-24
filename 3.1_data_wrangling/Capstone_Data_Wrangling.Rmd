@@ -1,0 +1,85 @@
+---
+title: "Capstone: Data Wrangling with Bank Data"
+input_file: "bank-full.xlsx"
+output_file: "bank_full_clean.csv"
+---
+
+##0: Load the data in RStudio and View it
+
+```{r}
+library(readxl)
+bank_full <- read_excel("C:Users/.../Desktop/bank-full.xlsx")
+View(bank_full)
+```
+
+##1: Clean up column names to be simple, short and descriptive
+```{r}
+str(bank_full)
+#create a list of columns to change and names to change to
+library(data.table)
+
+org <- c("default","balance","housing","loan","contact","day","month","campaign","pdays","previous","poutcome","y")
+
+chg <- c("default_credit","annual_balance","housing_loan","personal_loan","contact_type","last_contact_day","last_contact_month","contact_times","past_days","previous_contact_times","prev_outcome","outcome_term_deposit")
+
+setnames(bank_full, old = org, new = chg)
+```
+
+##2:Check for missing values and display all unique values in each column
+```{r}
+colSums(is.na(bank_full))
+lapply(bank_full,unique)
+#since 573 entries in annual_balance and duration were omitted in results, we can summarize to see how the numbers range and what the average and median are. 
+summary(bank_full$annual_balance)
+summary(bank_full$duration)
+```
+##4: To rule out outliers,it'd be best to display plots of each variable to see which outliers should be removed from the dataset
+```{r}
+#numeric
+library(ggplot2)
+lapply(c("job", "marital", "education", "contact_type","prev_outcome"),
+  function(col) {
+    ggplot(bank_full, aes_string(col)) + geom_bar() + coord_flip()
+  })
+#categorical
+lapply(c("age", "contact_times"),
+  function(x) {
+    hist(bank_full[[x]],xlab = x, main = x)
+  })
+
+#based on the info displayed in the plots, we should remove outliers for age which is below 20 and above 80. Contact_times that exceed 10 times should also be removed from the data set rows.Unknown job positions can be removed as well
+
+library(dplyr)
+bank_full <- bank_full %>% 
+  filter(age>=20 & age<=80 & contact_times<=10, job!='unknown')
+
+```
+
+
+
+##5: Create dummy variables for columns that display binary results
+```{r}
+
+#return numeric value for TRUE FALSE
+dummy_var <- function(x) {
+  ifelse((x == "yes"),1,0)
+}
+
+dummy_col <- c("default_credit", "housing_loan", "personal_loan", "outcome_term_deposit")
+
+for(i in dummy_col) {
+  column_n <- paste("dummy", i, sep = "_")
+  bank_full[[column_n]] <- dummy_var(bank_full[i])
+}
+
+str(bank_full)
+```
+
+##6: Submit the project on Github
+```{r}
+#Export results to csv file
+write.csv(bank_full,"bank_full_clean.csv")
+```
+
+
+
