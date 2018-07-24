@@ -29,7 +29,9 @@ setnames(bank_full, old = org, new = chg)
 ```{r}
 colSums(is.na(bank_full))
 lapply(bank_full,unique)
-#since 573 entries in annual_balance and duration were omitted in results, we can summarize to see how the numbers range and what the average and median are. 
+#since 573 entries in annual_balance and duration were omitted in results, 
+we can summarize to see how the numbers range and what the average and median are. 
+
 summary(bank_full$annual_balance)
 summary(bank_full$duration)
 ```
