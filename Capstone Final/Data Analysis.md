@@ -4,6 +4,9 @@ The bank data set displays data collected for a marketing campaign aimed at gett
 has already been cleaned up so the next step would be to analyze the data through exploratory data analysis and see if there are any
 conclusions that can be drawn.
 
+
+
+
 #### Step 1  Internal structure and cleanup of the data
 The first step to analyzing the data would be to look at the internal structure of the data object. By loading the clean data into R and 
 using the str and summary function. We can see that the clients range from age 20 to 80 with an annual balance between -8019 and 102127,
@@ -25,6 +28,9 @@ Another part of the data that might contain outliers are the negative annual bal
 |0.08 |0.0048|
 
 Finally, <b>last_contact_month</b>, <b>last_contact_day</b> and <b>past_days</b> should be removed to avoid confusion regarding numerical values for the analysis.
+
+
+
 
 #### Step 2 Analyzing and Visualizing the data
 
