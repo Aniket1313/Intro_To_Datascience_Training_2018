@@ -79,12 +79,4 @@ p-values we obtain objects the null, it could mean that there are strong differe
 | prev_outcome         | NA  | NA      | NA        | NA           | NA            | NA           | NA           | 0.00                 |
 | outcome_term_deposit | NA  | NA      | NA        | NA           | NA            | NA           | NA           | NA                   |
 
-
-### Step 3 Answering Capstone Project Questions 
-1. Can you count something interesting?
-2. Can you find some trends (high, low, increase, decrease, anomalies)?
-3. Can you make a bar plot or a histogram?
-4. Can you compare two related quantities?
-5. Can you make a scatterplot?
-6. Can you make a time-series plot?
-7. Having made these plots, what are some insights you get from them? Do you see any correlations? Is there a hypothesis you would like to investigate further? What other questions do they lead you to ask?
+Assuming that our Alpha Level is 0.05, we can see that only Contact_type and Personal_Loan seems to be unrelated, all other categorical data combinations have a p-value that rejects the null. Meaning most categorical data do have some affect on the outcome_term_desposit.
