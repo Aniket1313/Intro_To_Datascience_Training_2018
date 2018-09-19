@@ -1,4 +1,4 @@
-## Capstone Final - Data Analysis
+## Data Analysis
 
 The bank data set displays data collected for a marketing campaign aimed at getting customers to subscribe to term deposits. The data
 has already been cleaned up so the next step would be to analyze the data through exploratory data analysis and see if there are any
