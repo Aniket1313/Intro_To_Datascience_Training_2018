@@ -41,11 +41,11 @@ Moving on,
 |age                       |annual balance         |default_credit         |
 |job                       |duration               |housing_loan           |
 |marital                   |contact_times          |personal_loan          |
-|education                 |previous_contact_times |
+|education                 |previous_contact_times |outcome_term_deposit(y)|
 |contact_type              |                       |
 |prev_outcome              |                       |
 
-outcome_term_deposit(y)   
+
 
 
 
