@@ -30,15 +30,26 @@ skewness(bank$age)
 kurtosis(bank$age)
 ```
 
+| age | freq | percent |
+|-----|------|---------|
+| 20  | 50   | 0.11    |
+| 25  | 510  | 1.16    |
+| 33  | 1922 | 4.40    |
 
 Another part of the data that might contain outliers are the negative annual balance holders, logically speaking, users with negative annual balance holders are unlikely to open up a term deposit account. However, just to be sure, we can use frequency tables to determine whether or not this is true. By filtering out the negative balance holders we can see that they make up 8.5% of clients after we've removed our age outliers that users that opened a term deposit make up less than 0.5% of clients. Thus we can consider removing these users from our data set since it would be unlikely that they would affect the outcome of our analysis too much
 
-```{R}
+```R
 ##subset the data with negative annual balance and observer frequencies
 bk_f<-bank[bank$annual_balance<0,c(6,17)]
 table(bk_f$outcome_term_deposit)
 bank_m<-bank[bank$annual_balance>0,-which(names(bank) %in% c("last_contact_month","last_contact_day","past_days"))]
 ```
+
+| no  | yes  | 
+|-----|------|
+|3366 | 201  |
+|0.08 |0.0048|
+
 Finally,last_contact_month, last_contact_day and past_days should be removed to avoid confusion regarding numerical values for the analysis.
 
 
@@ -57,6 +68,14 @@ lapply(bank_m[,c(2,3,4,5,7,8,9,13,14)], plotseries)
 table(bank$default_credit)
 bank_m<-bank_m[,-which(names(bank_m)%in%c("default_credit"))]
 ```
+
+<b>default_credit</b>
+
+| no  | yes  | 
+|-----|------|
+|41018| 767  |
+|0.981|0.0183|
+
 
 Proceeding to numerical data, we can use bubble charts or scatterplots to understand the numerical values of our dataset. After creating these charts, we can see that within charts annual_balance, duration and previous_contact_times all contain extreme values. We can verify whether these values are true or false by simply using the table chart again, but this time with value limits of balance over 80000, duration over 4000 and previous contact times over 100. After we've confirmed that those values are in the single digits, we can proceed to eliminate them from our dataset. 
 
@@ -88,6 +107,15 @@ bank_n<-bank_m[,c(1,5,9,10,11)]
 cor(bank_n)
 
 ```
+
+| age annual_balance  |   duration |contact_times| previous_contact_times |
+|---------------------|------------|-------------|---------|
+| age                 |    1.00000000 |   0.083356651 | -0.030597602|   0.050363918 |          -0.027508176 |
+| annual_balance      |    0.08335665 |   1.000000000 |  0.015113375|  -0.006504731 |           0.009739325 |
+| duration            |   -0.03059760 |   0.015113375 |  1.000000000|  -0.048924942 |          -0.008585207 |
+| contact_times       |    0.05036392 |  -0.006504731 | -0.048924942|   1.000000000 |          -0.010718597 |
+| previous_contact_times| -0.02750818 |   0.009739325 | -0.008585207|  -0.010718597 |           1.000000000 |
+
 
 
 On the other hand, with categorical data, we can implement the Chi-square matrix and display all P-values between entries, if the
@@ -133,6 +161,20 @@ mat = chisqmatrix(bank_c)
 View(mat)
 
 ```
+
+
+| Chi-square Matrix    | job | marital | education | housing_loan | personal_loan | contact_type | prev_outcome | outcome_term_deposit |
+|----------------------|-----|---------|-----------|--------------|---------------|--------------|--------------|----------------------|
+| job                  | NA  | 0.00    | 0.00      | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 |
+| marital              | NA  | NA      | 0.00      | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 |
+| education            | NA  | NA      | NA        | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 |
+| housing_loan         | NA  | NA      | NA        | NA           | 0.00          | 0.00         | 0.00         | 0.00                 |
+| personal_loan        | NA  | NA      | NA        | NA           | NA            | 0.14         | 0.00         | 0.00                 |
+| contact_type         | NA  | NA      | NA        | NA           | NA            | NA           | 0.00         | 0.00                 |
+| prev_outcome         | NA  | NA      | NA        | NA           | NA            | NA           | NA           | 0.00                 |
+| outcome_term_deposit | NA  | NA      | NA        | NA           | NA            | NA           | NA           | NA                   |
+
+
 Assuming that our Alpha Level is 0.05, we can see that only Contact_type and Personal_Loan seems to be unrelated, all other categorical data combinations have a p-value that rejects the null. Meaning most categorical data do have some affect on the outcome_term_desposit.
 
 
