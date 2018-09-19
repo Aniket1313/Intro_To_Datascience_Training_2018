@@ -1,5 +1,27 @@
 # Data sets
 
+## A Data-Driven Approach to Bank Telemarketing 
+
+### Keywords
+consumer data, banking, telemarketing, wealth, status
+
+### Summary
+A collection of datasets that provides data that is related to a direct marketing campaign launched
+by the Portuguese Banking Institute. Within the data set contains customer data and whether the product
+was successfully subscribed or not. It may be possible to try and determine which factors are in play 
+here with the willingness of the consumer to accept the product based on their age, income or maritial status. 
+
+### Why pick this topic
+This topic is related to business and consumer research. Once a conclusion as to how to connect with the 
+customer is found, it may be applied to a different field. The data processing method is also important in this 
+case. The perks of this topic is the data set is quite complete and only requires one click to download.
+
+### How do I get it?
+The documentation for the first dataset is [here](http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
+And is downloadable under data folder. 
+
+
+
 ## Researching the Opiod Crisis - Accidental Drug Related Deaths in Connecticut from 2012 to 2017
 
 ### Keywords
@@ -48,26 +70,3 @@ The documentation for the first dataset is [here](https://usda.mannlib.cornell.e
 and the link to the data download is under "Latest Releases:".
 
 The second dataset can be obtained [here](https://www.usclimatedata.com/climate/addison/alabama/united-states/usal0586)
-
-
-
-
-## A Data-Driven Approach to Bank Telemarketing 
-
-### Keywords
-consumer data, banking, telemarketing, wealth, status
-
-### Summary
-A collection of datasets that provides data that is related to a direct marketing campaign launched
-by the Portuguese Banking Institute. Within the data set contains customer data and whether the product
-was successfully subscribed or not. It may be possible to try and determine which factors are in play 
-here with the willingness of the consumer to accept the product based on their age, income or maritial status. 
-
-### Why pick this topic
-This topic is related to business and consumer research. Once a conclusion as to how to connect with the 
-customer is found, it may be applied to a different field. The data processing method is also important in this 
-case. The perks of this topic is the data set is quite complete and only requires one click to download.
-
-### How do I get it?
-The documentation for the first dataset is [here](http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
-And is downloadable under data folder. 
