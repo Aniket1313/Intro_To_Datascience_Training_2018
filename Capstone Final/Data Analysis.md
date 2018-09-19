@@ -24,7 +24,7 @@ Another part of the data that might contain outliers are the negative annual bal
 |3366 | 201  |
 |0.08 |0.0048|
 
-Finally, last_contact_month, last_contact_day and past_days should be removed to avoid confusion regarding numerical values for the analysis.
+Finally, <b>last_contact_month</b>, <b>last_contact_day</b> and <b>past_days</b> should be removed to avoid confusion regarding numerical values for the analysis.
 
 #### Step 2 Analyzing and Visualizing the data
 
