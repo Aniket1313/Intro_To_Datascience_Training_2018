@@ -24,24 +24,25 @@ Another part of the data that might contain outliers are the negative annual bal
 |3366 | 201  |
 |0.08 |0.0048|
 
+Finally, last_contact_month, last_contact_day and past_days should be removed to avoid confusion regarding numerical values for the analysis.
+
 #### Step 2 Visualize the data
+
+
 
 |categorical data          |numerical data         |
 |--------------------------|-----------------------|
 |age                       |annual balance         |
 |job                       |duration               |
 |marital                   |contact_times          |
-|education                 |past_days              |
-|default_credit            |previous_contact_times |
+|education                 |previous_contact_times |
+|default_credit            |                       |
 |housing_loan              |                       |
 |personal_loan             |                       |
 |contact_type              |                       |
 |prev_outcome              |                       |
 |outcome_term_deposit(y)   |                       |
 
-
-|last_contact_month
-|last_contact_day
 
 
 
