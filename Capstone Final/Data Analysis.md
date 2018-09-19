@@ -47,6 +47,7 @@ Moving on, we can sort all the different columns into categorical/numerical/bina
 
 
 default_credit 
+
 | no  | yes  | 
 |-----|------|
 |41018| 767  |
