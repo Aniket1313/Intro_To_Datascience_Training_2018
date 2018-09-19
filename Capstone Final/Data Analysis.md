@@ -68,7 +68,8 @@ We can see none of the values exceeds 0.1, which means that there isn't a strong
 On the other hand, with categorical data, we can implement the Chi-square matrix and display all P-values between entries, if the
 p-values we obtain objects the null, it could mean that there are strong differences between the categories and their objects.
 
-|| job                  | marital | education | housing_loan | personal_loan | contact_type | prev_outcome | outcome_term_deposit |      |
+
+|Chi-square| job                  | marital | education | housing_loan | personal_loan | contact_type | prev_outcome | outcome_term_deposit |      |
 |----------------------|---------|-----------|--------------|---------------|--------------|--------------|----------------------|------|
 | job                  | NA      | 0.00      | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
 | marital              | NA      | NA        | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
