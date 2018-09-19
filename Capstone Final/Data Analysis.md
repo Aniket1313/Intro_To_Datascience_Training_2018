@@ -53,7 +53,18 @@ Moving on, we can sort all the different columns into categorical/numerical/bina
 
 Proceeding to numerical data, we can use bubble charts or scatterplots to understand the numerical values of our dataset. After creating these charts, we can see that within charts annual_balance, duration and previous_contact_times all contain extreme values. We can verify whether these values are true or false by simply using the table chart again, but this time with value limits of balance over 80000, duration over 4000 and previous contact times over 100. After we've confirmed that those values are in the single digits, we can proceed to eliminate them from our dataset. 
 
-### Step 3 Chi-square and relationships between 
+### Step 3 Correlations and Chi-squares
+To measure the relations between numerical and categorical variables, we proceed split our datasets into two matrixes, one including numerical value and the other containing only categorical values. To see if the numerical values have any relationship between each other we use a correlation table 
+
+| age annual_balance  |   duration |contact_times| previous_contact_times |
+|---------------------|------------|-------------|-------------------------------------------------------|
+| age                 |    1.00000000 |   0.083356651 | -0.030597602|   0.050363918 |          -0.027508176 |
+| annual_balance      |    0.08335665 |   1.000000000 |  0.015113375|  -0.006504731 |           0.009739325 |
+| duration            |   -0.03059760 |   0.015113375 |  1.000000000|  -0.048924942 |          -0.008585207 |
+| contact_times       |    0.05036392 |  -0.006504731 | -0.048924942|   1.000000000 |          -0.010718597 |
+| previous_contact_times| -0.02750818 |   0.009739325 | -0.008585207|  -0.010718597 |           1.000000000 |
+
+
 
 ```R
 chisqmatrix <- function(x) {
