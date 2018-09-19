@@ -57,7 +57,7 @@ Proceeding to numerical data, we can use bubble charts or scatterplots to unders
 To measure the relations between numerical and categorical variables, we proceed split our datasets into two matrixes, one including numerical value and the other containing only categorical values. To see if the numerical values have any relationship between each other we use a correlation table 
 
 | age annual_balance  |   duration |contact_times| previous_contact_times |
-|---------------------|------------|-------------|-------------------------------------------------------|
+|---------------------|------------|-------------|---------|
 | age                 |    1.00000000 |   0.083356651 | -0.030597602|   0.050363918 |          -0.027508176 |
 | annual_balance      |    0.08335665 |   1.000000000 |  0.015113375|  -0.006504731 |           0.009739325 |
 | duration            |   -0.03059760 |   0.015113375 |  1.000000000|  -0.048924942 |          -0.008585207 |
