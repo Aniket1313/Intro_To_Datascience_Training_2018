@@ -1,0 +1,142 @@
+---
+title: "capstone - statistics"
+input: "bank_full_clean.csv"
+---
+
+### Introduction
+The bank data set displays data collected for a marketing campaign aimed at getting customers to subscribe to term deposits. The data has already been cleaned up so the next step would be to analyze the data through exploratory data analysis and see if there are any conclusions that can be drawn.
+
+
+### Step 1  Internal structure and cleanup of the data
+The first step to analyzing the data would be to look at the internal structure of the data object. By loading the clean data into R and 
+using the str and summary function. We can see that the clients range from age 20 to 80 with an annual balance between -8019 and 102127,
+other numerical data covers contact frequency, last contact date and contact duration.
+
+The most immediate outliers we have in the dataset shows up in age. So by looking at the distribution of age, we can decide whether or not we'd like to remove ages that are niche to our analysis. After creating a datatable that caculates the frequencies of the ages, we can delete any age that covers less than 1% of the data. Which narrows down our age distribution to between ages 25 and 60.
+
+```{R}
+##load your dataset into the R environment
+library(readr)
+bank_full_clean <- read_csv("C:/Users/Alan/Desktop/bank_full_clean.csv")
+
+##look at the attributes of the dataset
+str(bank_full_clean)
+View(summary(bank_full_clean))
+age<-data.frame((ftable(bank_full_clean$age)))
+age$percent<-age$Freq/sum(age$Freq)*100
+bank <- bank_full_clean[bank_full_clean$age <= 60 & bank_full_clean$age >= 25, ] 
+library(moments)
+skewness(bank$age)
+kurtosis(bank$age)
+```
+
+
+Another part of the data that might contain outliers are the negative annual balance holders, logically speaking, users with negative annual balance holders are unlikely to open up a term deposit account. However, just to be sure, we can use frequency tables to determine whether or not this is true. By filtering out the negative balance holders we can see that they make up 8.5% of clients after we've removed our age outliers that users that opened a term deposit make up less than 0.5% of clients. Thus we can consider removing these users from our data set since it would be unlikely that they would affect the outcome of our analysis too much
+
+```{R}
+##subset the data with negative annual balance and observer frequencies
+bk_f<-bank[bank$annual_balance<0,c(6,17)]
+table(bk_f$outcome_term_deposit)
+bank_m<-bank[bank$annual_balance>0,-which(names(bank) %in% c("last_contact_month","last_contact_day","past_days"))]
+```
+Finally,last_contact_month, last_contact_day and past_days should be removed to avoid confusion regarding numerical values for the analysis.
+
+
+
+### Step 2 Analyzing and Visualizing the data
+Moving on, we can sort all the different columns into categorical/numerical/binary data. Starting with categorical and binary data, we can generate a few histograms to see the relationship between age distribution along with other variables. We can easily discover that very few clients have default credit, so eventually we can remove that column from our dataset. Based on the histogram, everything else seems fairly normal.
+
+```{R}
+#Age histogram and removing outliers
+library(ggplot2)
+ggplot(bank_m, aes(x=age)) + geom_histogram(binwidth = 5)
+plotseries<-function(yvar){
+ggplot(bank_m, aes(x=age,fill = factor(yvar))) + geom_histogram(binwidth = 5)
+}
+lapply(bank_m[,c(2,3,4,5,7,8,9,13,14)], plotseries)
+table(bank$default_credit)
+bank_m<-bank_m[,-which(names(bank_m)%in%c("default_credit"))]
+```
+
+Proceeding to numerical data, we can use bubble charts or scatterplots to understand the numerical values of our dataset. After creating these charts, we can see that within charts annual_balance, duration and previous_contact_times all contain extreme values. We can verify whether these values are true or false by simply using the table chart again, but this time with value limits of balance over 80000, duration over 4000 and previous contact times over 100. After we've confirmed that those values are in the single digits, we can proceed to eliminate them from our dataset. 
+
+```{R}
+##questionable bubble chart
+bubbleseries<-function(zvar){
+  ggplot(bank_m,aes(x=age, y=zvar, size = zvar, color = zvar)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+}
+lapply(bank_m[,c(5,9,10,11)], bubbleseries)
+
+table(bank_m$annual_balance>80000)
+table(bank_m$duration>4000)
+table(bank_m$previous_contact_times>100)
+
+bank_m<-bank_m[bank_m$previous_contact_times<100,]
+bank_m<-bank_m[bank_m$annual_balance<80000,]
+```
+
+
+### Step 3 Correlations and Chi-squares
+To measure the relations between numerical and categorical variables, we proceed split our datasets into two matrixes, one including numerical value and the other containing only categorical values. To see if the numerical values have any relationship between each other we use a correlation table.
+We can see none of the values exceeds 0.1, which means that there isn't a strong correlation between these values.
+
+```{R}
+#Correlation Matrix
+bank_n<-bank_m[,c(1,5,9,10,11)]
+cor(bank_n)
+
+```
+
+
+On the other hand, with categorical data, we can implement the Chi-square matrix and display all P-values between entries, if the
+p-values we obtain objects the null, it could mean that there are strong differences between the categories and their objects.
+
+```{R}
+#create two dimensional tab
+bank.tab<-table(bank_m$prev_outcome,bank_m$outcome_term_deposit)
+
+#row marginal
+margin.table(bank.tab,1)
+
+#column marginal
+margin.table(bank.tab,2) 
+
+#cell %
+round(prop.table(bank.tab),2)
+
+#row %
+round(prop.table(bank.tab,1),2) 
+
+#column %
+round(prop.table(bank.tab,2),2) 
+
+#Chi-squared test
+chisq.test(bank.tab)
+
+#Categorical Data
+bank_c<-bank_m[,c(2,3,4,6,7,8,12,13)]
+
+#Chi-square Matrix
+chisqmatrix <- function(x) {
+  names = colnames(x);  num = length(names)
+  m = matrix(nrow=num,ncol=num,dimnames=list(names,names))
+  for (i in 1:(num-1)) {
+    for (j in (i+1):num) {
+      m[i,j] = chisq.test(x[[i]],x[[j]],)$p.value
+    }
+  }
+  return (m)
+}
+mat = chisqmatrix(bank_c)
+View(mat)
+
+```
+Assuming that our Alpha Level is 0.05, we can see that only Contact_type and Personal_Loan seems to be unrelated, all other categorical data combinations have a p-value that rejects the null. Meaning most categorical data do have some affect on the outcome_term_desposit.
+
+
+#machine learning part
+SGD Classifier 
+kernel approximation
+
