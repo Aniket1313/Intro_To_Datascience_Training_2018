@@ -1,0 +1,99 @@
+---
+title: "capstone - statistics"
+input: "bank_full_clean.csv"
+---
+
+```{R}
+##Step 1, load your dataset into the R environment
+library(readr)
+bank_full_clean <- read_csv("C:/Users/Alan/Desktop/bank_full_clean.csv")
+
+##Step 2, look at the attributes of the dataset
+str(bank_full_clean)
+View(summary(bank_full_clean))
+age<-data.frame((ftable(bank_full_clean$age)))
+age$percent<-age$Freq/sum(age$Freq)*100
+bank <- bank_full_clean[bank_full_clean$age <= 60 & bank_full_clean$age >= 25, ] 
+library(moments)
+skewness(bank$age)
+kurtosis(bank$age)
+
+
+##Step 3, subset the data with negative annual balance and observer frequencies
+bk_f<-bank[bank$annual_balance<0,c(6,17)]
+table(bk_f$outcome_term_deposit)
+bank_m<-bank[bank$annual_balance>0,-which(names(bank) %in% c("last_contact_month","last_contact_day","past_days"))]
+
+##Step 4, Age histogram and removing outliers
+library(ggplot2)
+ggplot(bank_m, aes(x=age)) + geom_histogram(binwidth = 5)
+plotseries<-function(yvar){
+ggplot(bank_m, aes(x=age,fill = factor(yvar))) + geom_histogram(binwidth = 5)
+}
+lapply(bank_m[,c(2,3,4,5,7,8,9,13,14)], plotseries)
+table(bank$default_credit)
+bank_m<-bank_m[,-which(names(bank_m)%in%c("default_credit"))]
+
+##Step 5, questionable bubble chart
+bubbleseries<-function(zvar){
+  ggplot(bank_m,aes(x=age, y=zvar, size = zvar, color = zvar)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+}
+lapply(bank_m[,c(5,9,10,11)], bubbleseries)
+
+table(bank_m$annual_balance>80000)
+table(bank_m$duration>4000)
+table(bank_m$previous_contact_times>100)
+
+bank_m<-bank_m[bank_m$previous_contact_times<100,]
+bank_m<-bank_m[bank_m$annual_balance<80000,]
+
+##Step 6 Chi-square calculations
+#create two dimensional tab
+bank.tab<-table(bank_m$prev_outcome,bank_m$outcome_term_deposit)
+
+#row marginal
+margin.table(bank.tab,1)
+
+#column marginal
+margin.table(bank.tab,2) 
+
+#cell %
+round(prop.table(bank.tab),2)
+
+#row %
+round(prop.table(bank.tab,1),2) 
+
+#column %
+round(prop.table(bank.tab,2),2) 
+
+#Chi-squared test
+chisq.test(bank.tab)
+
+bank_n<-bank_m[,c(1,5,9,10,11)]
+cor(bank_n)
+
+bank_c<-bank_m[,c(2,3,4,6,7,8,12,13)]
+
+
+chisqmatrix <- function(x) {
+  names = colnames(x);  num = length(names)
+  m = matrix(nrow=num,ncol=num,dimnames=list(names,names))
+  for (i in 1:(num-1)) {
+    for (j in (i+1):num) {
+      m[i,j] = chisq.test(x[[i]],x[[j]],)$p.value
+    }
+  }
+  return (m)
+}
+mat = chisqmatrix(bank_c)
+View(mat)
+
+```
+
+
+#machine learning part
+SGD Classifier 
+kernel approximation
+
