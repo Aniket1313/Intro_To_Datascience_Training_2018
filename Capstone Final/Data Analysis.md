@@ -64,23 +64,20 @@ To measure the relations between numerical and categorical variables, we proceed
 | contact_times       |    0.05036392 |  -0.006504731 | -0.048924942|   1.000000000 |          -0.010718597 |
 | previous_contact_times| -0.02750818 |   0.009739325 | -0.008585207|  -0.010718597 |           1.000000000 |
 
+We can see none of the values exceeds 0.1, which means that there isn't a strong correlation between these values.
+On the other hand, with categorical data, we can implement the Chi-square matrix and display all P-values between entries, if the
+p-values we obtain objects the null, it could mean that there are strong differences between the categories and their objects.
 
-
-```R
-chisqmatrix <- function(x) {
-  names = colnames(x);  num = length(names)
-  m = matrix(nrow=num,ncol=num,dimnames=list(names,names))
-  for (i in 1:(num-1)) {
-    for (j in (i+1):num) {
-      m[i,j] = chisq.test(x[[i]],x[[j]],)$p.value
-    }
-  }
-  return (m)
-}
-mat = chisqmatrix(bank_categorical)
-```
-
-
+|| job                  | marital | education | housing_loan | personal_loan | contact_type | prev_outcome | outcome_term_deposit |      |
+|----------------------|---------|-----------|--------------|---------------|--------------|--------------|----------------------|------|
+| job                  | NA      | 0.00      | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
+| marital              | NA      | NA        | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
+| education            | NA      | NA        | NA           | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
+| housing_loan         | NA      | NA        | NA           | NA            | 0.00         | 0.00         | 0.00                 | 0.00 |
+| personal_loan        | NA      | NA        | NA           | NA            | NA           | 0.14         | 0.00                 | 0.00 |
+| contact_type         | NA      | NA        | NA           | NA            | NA           | NA           | 0.00                 | 0.00 |
+| prev_outcome         | NA      | NA        | NA           | NA            | NA           | NA           | NA                   | 0.00 |
+| outcome_term_deposit | NA      | NA        | NA           | NA            | NA           | NA           | NA                   | NA   |
 
 
 
