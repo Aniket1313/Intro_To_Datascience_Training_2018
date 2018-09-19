@@ -33,8 +33,14 @@ Finally, <b>last_contact_month</b>, <b>last_contact_day</b> and <b>past_days</b>
 
 
 ### Step 2 Analyzing and Visualizing the data
-Moving on, we can sort all the different columns into categorical/numerical/binary data. Starting with categorical and binary data, we can generate a few histograms to see the relationship between age distribution along with other variables. We can easily discover that very few clients have default credit
+Moving on, we can sort all the different columns into categorical/numerical/binary data. Starting with categorical and binary data, we can generate a few histograms to see the relationship between age distribution along with other variables. We can easily discover that very few clients have default credit, so eventually we can remove that column from our dataset. Based on the histogram, everything else seems fairly normal.
 
+<b>default_credit</b>
+
+| no  | yes  | 
+|-----|------|
+|41018| 767  |
+|0.981|0.0183|
 
 |categorical data          |numerical data         |binary data (dummy)
 |--------------------------|-----------------------|-----------------------|
@@ -45,16 +51,7 @@ Moving on, we can sort all the different columns into categorical/numerical/bina
 |contact_type              |                       |
 |prev_outcome              |                       |
 
-
-<b>default_credit</b>
-
-| no  | yes  | 
-|-----|------|
-|41018| 767  |
-|0.981|0.0183|
-
-
-
+Proceeding to numerical data, 
 
 
 
