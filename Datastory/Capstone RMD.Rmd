@@ -14,7 +14,7 @@ other numerical data covers contact frequency, last contact date and contact dur
 
 The most immediate outliers we have in the dataset shows up in age. So by looking at the distribution of age, we can decide whether or not we'd like to remove ages that are niche to our analysis. After creating a datatable that caculates the frequencies of the ages, we can delete any age that covers less than 1% of the data. Which narrows down our age distribution to between ages 25 and 60.
 
-```{R}
+```R
 ##load your dataset into the R environment
 library(readr)
 bank_full_clean <- read_csv("C:/Users/Alan/Desktop/bank_full_clean.csv")
