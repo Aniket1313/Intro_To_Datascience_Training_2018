@@ -68,18 +68,16 @@ We can see none of the values exceeds 0.1, which means that there isn't a strong
 On the other hand, with categorical data, we can implement the Chi-square matrix and display all P-values between entries, if the
 p-values we obtain objects the null, it could mean that there are strong differences between the categories and their objects.
 
-
-|Chi-square| job                  | marital | education | housing_loan | personal_loan | contact_type | prev_outcome | outcome_term_deposit |      |
-|----------------------|---------|-----------|--------------|---------------|--------------|--------------|----------------------|------|
-| job                  | NA      | 0.00      | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
-| marital              | NA      | NA        | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
-| education            | NA      | NA        | NA           | 0.00          | 0.00         | 0.00         | 0.00                 | 0.00 |
-| housing_loan         | NA      | NA        | NA           | NA            | 0.00         | 0.00         | 0.00                 | 0.00 |
-| personal_loan        | NA      | NA        | NA           | NA            | NA           | 0.14         | 0.00                 | 0.00 |
-| contact_type         | NA      | NA        | NA           | NA            | NA           | NA           | 0.00                 | 0.00 |
-| prev_outcome         | NA      | NA        | NA           | NA            | NA           | NA           | NA                   | 0.00 |
-| outcome_term_deposit | NA      | NA        | NA           | NA            | NA           | NA           | NA                   | NA   |
-
+| Chi-square Matrix    | job | marital | education | housing_loan | personal_loan | contact_type | prev_outcome | outcome_term_deposit |
+|----------------------|-----|---------|-----------|--------------|---------------|--------------|--------------|----------------------|
+| job                  | NA  | 0.00    | 0.00      | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 |
+| marital              | NA  | NA      | 0.00      | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 |
+| education            | NA  | NA      | NA        | 0.00         | 0.00          | 0.00         | 0.00         | 0.00                 |
+| housing_loan         | NA  | NA      | NA        | NA           | 0.00          | 0.00         | 0.00         | 0.00                 |
+| personal_loan        | NA  | NA      | NA        | NA           | NA            | 0.14         | 0.00         | 0.00                 |
+| contact_type         | NA  | NA      | NA        | NA           | NA            | NA           | 0.00         | 0.00                 |
+| prev_outcome         | NA  | NA      | NA        | NA           | NA            | NA           | NA           | 0.00                 |
+| outcome_term_deposit | NA  | NA      | NA        | NA           | NA            | NA           | NA           | NA                   |
 
 
 ### Step 3 Answering Capstone Project Questions 
