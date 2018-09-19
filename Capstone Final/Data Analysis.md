@@ -44,12 +44,12 @@ Moving on, we can sort all the different columns into categorical/numerical/bina
 
 |categorical data          |numerical data         |binary data (dummy)
 |--------------------------|-----------------------|-----------------------|
-|age                       |annual balance         |default_credit         |
+|prev_outcome              |annual balance         |default_credit         |
 |job                       |duration               |housing_loan           |
 |marital                   |contact_times          |personal_loan          |
 |education                 |previous_contact_times |outcome_term_deposit(y)|
-|contact_type              |                       |
-|prev_outcome              |                       |
+|contact_type              |age                    |
+
 
 Proceeding to numerical data, 
 
