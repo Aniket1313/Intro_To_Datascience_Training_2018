@@ -44,7 +44,8 @@ Moving on,
 |education                 |previous_contact_times |
 |contact_type              |                       |
 |prev_outcome              |                       |
-|outcome_term_deposit(y)   |                       |
+
+outcome_term_deposit(y)   
 
 
 
