@@ -26,6 +26,22 @@ Another part of the data that might contain outliers are the negative annual bal
 
 #### Step 2 Visualize the data
 
+|categorical data          |numerical data         |
+|--------------------------|-----------------------|
+|age                       |annual balance         |
+|job                       |duration               |
+|marital                   |contact_times          |
+|education                 |past_days              |
+|default_credit            |previous_contact_times |
+|housing_loan              |                       |
+|personal_loan             |                       |
+|contact_type              |                       |
+|prev_outcome              |                       |
+|outcome_term_deposit(y)   |                       |
+
+
+|last_contact_month
+|last_contact_day
 
 
 
