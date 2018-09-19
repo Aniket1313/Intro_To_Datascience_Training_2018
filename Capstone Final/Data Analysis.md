@@ -46,7 +46,7 @@ Moving on, we can sort all the different columns into categorical/numerical/bina
 |prev_outcome              |                       |
 
 
-default_credit 
+<b>default_credit</b>
 
 | no  | yes  | 
 |-----|------|
