@@ -33,18 +33,15 @@ Finally, <b>last_contact_month</b>, <b>last_contact_day</b> and <b>past_days</b>
 
 
 #### Step 2 Analyzing and Visualizing the data
+Moving on, 
 
 
-
-|categorical data          |numerical data         |
-|--------------------------|-----------------------|
-|age                       |annual balance         |
-|job                       |duration               |
-|marital                   |contact_times          |
+|categorical data          |numerical data         |binary data (dummy)
+|--------------------------|-----------------------|-----------------------|
+|age                       |annual balance         |default_credit         |
+|job                       |duration               |housing_loan           |
+|marital                   |contact_times          |personal_loan          |
 |education                 |previous_contact_times |
-|default_credit            |                       |
-|housing_loan              |                       |
-|personal_loan             |                       |
 |contact_type              |                       |
 |prev_outcome              |                       |
 |outcome_term_deposit(y)   |                       |
