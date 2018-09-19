@@ -7,7 +7,7 @@ conclusions that can be drawn.
 
 
 
-#### Step 1  Internal structure and cleanup of the data
+### Step 1  Internal structure and cleanup of the data
 The first step to analyzing the data would be to look at the internal structure of the data object. By loading the clean data into R and 
 using the str and summary function. We can see that the clients range from age 20 to 80 with an annual balance between -8019 and 102127,
 other numerical data covers contact frequency, last contact date and contact duration.
@@ -32,7 +32,7 @@ Finally, <b>last_contact_month</b>, <b>last_contact_day</b> and <b>past_days</b>
 
 
 
-#### Step 2 Analyzing and Visualizing the data
+### Step 2 Analyzing and Visualizing the data
 Moving on, we can sort all the different columns into categorical/numerical/binary data. Starting with categorical and binary data, we can generate a few histograms to see the relationship between age distribution along with other variables. We can easily discover that very few clients have default credit
 
 
@@ -67,7 +67,7 @@ Moving on, we can sort all the different columns into categorical/numerical/bina
 
 
 
-#### Step 3 Answering Capstone Project Questions 
+### Step 3 Answering Capstone Project Questions 
 1. Can you count something interesting?
 2. Can you find some trends (high, low, increase, decrease, anomalies)?
 3. Can you make a bar plot or a histogram?
