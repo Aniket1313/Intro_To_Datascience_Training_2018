@@ -9,4 +9,14 @@ The first step to analyzing the data would be to look at the internal structure 
 using the str and summary function. We can see that the clients range from age 20 to 80 with an annual balance between -8019 and 102127,
 other numerical data covers contact frequency, last contact date and contact duration.
 
-#### Step 2  
+
+The most immediate outliers usually show up in age. So by looking at the distribution of age, we can decide whether or not we'd like to remove ages that are niche to our analysis. After creating a datatable that caculates the 
+
+| age | freq | percent |
+|-----|------|---------|
+| 20  | 50   | 0.11    |
+| 25  | 510  | 1.16    |
+| 33  | 1922 | 4.40    |
+
+
+bank <- bank_full_clean[bank_full_clean$age <= 60 & bank_full_clean$age >= 25, ] 
