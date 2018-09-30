@@ -177,8 +177,3 @@ View(mat)
 
 Assuming that our Alpha Level is 0.05, we can see that only Contact_type and Personal_Loan seems to be unrelated, all other categorical data combinations have a p-value that rejects the null. Meaning most categorical data do have some affect on the outcome_term_desposit.
 
-
-#machine learning part
-SGD Classifier 
-kernel approximation
-
