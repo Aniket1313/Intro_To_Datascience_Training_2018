@@ -313,13 +313,10 @@ plot.annual_balance <- autoplot(par.bank, contour = TRUE)
 grid.arrange(plot.age,plot.job,plot.marital,plot.education,plot.annual_balance)
 ```
 
+![alt text](https://github.com/arclightspanner/Springboard-Project/blob/master/Datastory/PDP%20Results.JPG?raw=true)
 
+Unfortunately, Partial Dependence Plot shows that nearly all major consumer attributes positively contributed to the final decision making of the random forest. Thus it is difficult to determine what actually contributes to the results of the forrest.
 
-Unfortunately, Partial Dependence Plot shows that nearly all major consumer attributes contribute to the final decision making of the random forest in a positive way. Thus it is difficult to determine what actually contributes to the results of the forrest. However, 
+### Conclusion
 
-
-
-
-
-4.For a marketing campaign, targeting the right people is important but obviously in the data we were provided, we can see that previous campaign success and duration matters as well.
-```
+By researching the data and deploying both statistics and machine learning models, we can conclude that the success of this particular campaign was determined by the contact duration and the success of the previous campaign. From a marketing standpoint, it makes sense that consumers that are willing to listen to the seller for long periods of time and is already a customer from the beginning is more likely to accept similar services from the same organization. This data and the classification tree we've built shows just that. While we are also able to generate a high accuracy machine learning model without data containing the two important features mentioned above, we are unable to determine what actually matters in terms of consumer demographics in relation to campaign success. However, this model can still be used to predict future campaign success if marketers want to target specific groups of consumers. The only issue would be the lack of transparency and understanding of how the model works internally. 
