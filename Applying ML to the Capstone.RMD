@@ -1,17 +1,22 @@
 ### Applying Machine Learning to My Capstone
 
-#How do you frame your main question as a machine learning problem?
+How do you frame your main question as a machine learning problem?
+
 The main question to raise is whether we can predict whether or not consumers are willing to sign up for term deposits based on the bank data we've obtained in our dataset. The data contains multiple features which mainly covers previous campaign information and demographic data. Since we don't need to make assumptions about the distribution of our data and everything is segmented correctly, it is obvious that we should use supervised learning.
 
-#If it is supervised, is it a regression or a classification?
+If it is supervised, is it a regression or a classification?
+
 In our case, the outcome is binary, the features are a mixture of categorical and numerical data, thus our machine learning model is classification.
 
-#What are the main features (also called independent variables or predictors) that you'll use?
+What are the main features (also called independent variables or predictors) that you'll use?
+
 The independent variables would include the list below
 age, job, marita, education, annual_balance,contact_type,duration, contact_times ,previous_contact_times,prev_outcome_of_campaign ,dummy_default_credit,dummy_housing_loan,dummy_personal_loan.
 
-#Which machine learning technique will you use?
+Which machine learning technique will you use?
+
 We will start with a tree based model. Specifically classification tree and also include random forest
 
-#How will you evaluate the success of your machine learning technique? What metric will you use?
+How will you evaluate the success of your machine learning technique? What metric will you use?
+
 The success would be based on a number of techniques, specifcially accuracy rate, ROC curve. An additional metric we'd use is Partial Dependence Plot for random forest to see if any features would stand out or are not significant.
