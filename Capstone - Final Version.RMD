@@ -197,9 +197,11 @@ bank_adj<-na.omit(bank_adj)
 By deploying the code above we are able to further cleanup the data for it to fit in machine learning models.
 
 
-```{R}
-### Step 5 Build a Tree Diagram
+### Step 3 Build a Tree Diagram
 
+
+
+```R
 #split data into training sets and test sets
 if (!require(caTools)) install.packages('caTools')
 library(caTools)
@@ -209,13 +211,17 @@ train <- subset(bank_adj,split == TRUE)
 test <- subset(bank_adj, split == FALSE)
 if (!require(rpart)) install.packages('rpart')
 if (!require(rpart.plot)) install.packages('rpart.plot')
-
 #build a basic tree diagram using the train data set
 library(rpart)
 library(rpart.plot)
 banktree <- rpart(dummy_outcome_term_deposit ~ age + job + marital + education + annual_balance + contact_type + duration + contact_times + previous_contact_times + prev_outcome + dummy_default_credit + dummy_housing_loan + dummy_personal_loan, data = train, method = 'class', control = rpart.control(minbucket=25))
 prp(banktree)
+```
 
+
+
+
+```R
 #verify accuracy with test data
 bankpredict = predict(banktree, newdata = test, type="class")
 table(test$dummy_outcome_term_deposit,bankpredict)
