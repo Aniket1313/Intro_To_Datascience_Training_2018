@@ -197,10 +197,8 @@ bank_adj<-na.omit(bank_adj)
 By deploying the code above we are able to further cleanup the data for it to fit in machine learning models.
 
 
-### Step 3 Build a Tree Diagram
-
-
-
+### Step 4 Build a Classification Tree
+Since the data we have is a mixture of categorical and numerical data and the resulting outcome of the data is binary. The obvious model to fit the data with is a Tree Based Model. In our case, we've built a classification tree using the code below.
 ```R
 #split data into training sets and test sets
 if (!require(caTools)) install.packages('caTools')
@@ -217,9 +215,17 @@ library(rpart.plot)
 banktree <- rpart(dummy_outcome_term_deposit ~ age + job + marital + education + annual_balance + contact_type + duration + contact_times + previous_contact_times + prev_outcome + dummy_default_credit + dummy_housing_loan + dummy_personal_loan, data = train, method = 'class', control = rpart.control(minbucket=25))
 prp(banktree)
 ```
+![alt text](https://github.com/arclightspanner/Springboard-Project/blob/master/Datastory/Tree%20Diagram.JPG)
 
+We can see that draw a few conclusions based on the tree that R generated above:
 
+1.The tree is solely based on duration and previous contact outcomes, which is an indication that other features did not stand out or show significance compared to these two features. 
 
+2.When the contact duration exceeds 14 minutes, the likihood for success increases.
+
+3.If contact duration is below that, then the results would be based on the outcome of previous campaign, if the previous campaign was successful then the consumer would be morely to open up a term deposit if not then the consumer would less likely open up a term deposit.
+
+To further test the accuracy of the data we would move this model from our training data to our test data and measure the accuracy of that set. In addition, we would generate an ROC curve to determine how good our prediction was. 
 
 ```R
 #verify accuracy with test data
@@ -237,11 +243,14 @@ pred <- prediction(predictROC[,2],test$dummy_outcome_term_deposit)
 perf <- performance(pred,"tpr","fpr")
 plot(perf)
 ```
+![alt text](https://github.com/arclightspanner/Springboard-Project/blob/master/Datastory/ROC%20Curve.JPG?raw=true)
 
+We can see that our model is able to generate an accuracy rate of 90.41% and a left leaning ROC curve which indicates a reasonable accuracy of the prediction.
 
+Although our classification model already has an accuracy rate of 90.41%, it might be interesting to see if a Random Forest Model would be able to increase that accuracy rate higher.
 
-```{R}
-### Step 5 Deploy Random Forest
+```R
+#Deploy Random Forest
 if (!require(randomForest)) install.packages('randomForest')
 library(randomForest)
 bankForest <- randomForest(dummy_outcome_term_deposit ~ age + job + marital + education + annual_balance + contact_type + duration + contact_times + previous_contact_times + prev_outcome + dummy_default_credit + dummy_housing_loan + dummy_personal_loan, data = train, nodesize = 25, ntree = 200)
@@ -250,37 +259,67 @@ table(test$dummy_outcome_term_deposit,predictForest)
 accuracy = (9067+386)/(9067+386+211+830)
 print(accuracy)
 ```
+The accuracy we received from the Random Forest Model is 90.08% which is a bit lower than the classification model, so it would be recommended that we use the classification model to make future predictions.
 
-
-
-###Conclusion: deploying random forests decreases the accuracy by 0.4%. Thus it's better to go with using the simpler tree diagram for more transparency. 
-
-###Tree diagram interpretation:
-1.The tree is solo based on duration and previous contact outcomes
-
-2.When the contact duration exceeds 14 minutes, the likihood for success increases.
-
-3.If contact duration is below that, then the results would be based on the outcome of previous campaign was successful.
-
-4.For a marketing campaign, targeting the right people is important but obviously in the data we were provided, we can see that previous campaign success and duration matters as well.
-
-###Followup Research
-For tree diagrams, what if we actually remove duration and prev_out and only include variables highlighting personal consumer information.
-
-```{R}
+### Step 5 Researching Consumer Features
+From the classification model diagram in step 4, we can see that prev_outcome and duration are the main features determining the decisions made. But what if we wanted to see if age/job/marital status/education could help us determine potential clients in the future. Surely demographics would play a key feature in our modeling if we didn't have previous campaign results and contact info. 
+So in this step we removed duration and prev_out and only include variables highlighting personal demographic information.
+```R
 bank_fr<-bank_adj[,c(1,2,3,4,5,11,12,13,14)]
-set.seed(1148)
+set.seed(48)
 split <- sample.split(bank_fr$dummy_outcome_term_deposit, SplitRatio = 0.7)
 train <- subset(bank_fr,split == TRUE)
 test <- subset(bank_fr, split == FALSE)
 banktree_fr <- rpart(dummy_outcome_term_deposit ~ age + job + marital + education + annual_balance + dummy_default_credit + dummy_housing_loan + dummy_personal_loan, data = train, method = 'class', control = rpart.control(minbucket=25))
 prp(banktree_fr)
+```
+The code above only generated a "0" node, which means that the majority of predictions predicted that no matter what the features were, they would not sign up for a term deposit any way or the other. So instead of using a classification model, we proceed to generate a random forest
 
-###it seems that the tree diagram was unable to be generated. So instead we proceed to use random forest
-
+```R
 bankForest <- randomForest(dummy_outcome_term_deposit ~ age + job + marital + education + annual_balance + dummy_default_credit + dummy_housing_loan + dummy_personal_loan, data = train, nodesize = 25, ntree = 200)
 table(test$dummy_outcome_term_deposit,predictForest)
 accuracy = (8827+146)/(1070+8827+451+146)
 print(accuracy)
-## 85.5%, but with no way of knowing what is the determining factor
+```
+The random forest generated an accuracy of 85.5%, however, since we have around 200 trees, it's hard to determine what feature affected the models decision.In this scenario, we deployed a partial dependence plot to most features in order to understand what affected the model the most.
+
+```{R}
+###Use Partial Dependence Plot to figure out what is going on within the randomforest model
+if (!require(pdp)) install.packages('pdp')
+
+library(pdp)
+library(ggplot2)
+
+#plot variable age
+par.bank <- partial(bankForest, pred.var = c("age"), chull = TRUE)
+plot.age <- autoplot(par.bank, contour = TRUE)
+
+#plot variable job
+par.bank <- partial(bankForest, pred.var = c("job"), chull = TRUE)
+plot.job <- autoplot(par.bank, contour = TRUE)
+
+#plot variable marital
+par.bank <- partial(bankForest, pred.var = c("marital"), chull = TRUE)
+plot.marital <- autoplot(par.bank, contour = TRUE)
+
+#plot variable education
+par.bank <- partial(bankForest, pred.var = c("education"), chull = TRUE)
+plot.education <- autoplot(par.bank, contour = TRUE)
+
+#plot variable annual balance
+par.bank <- partial(bankForest, pred.var = c("annual_balance"), chull = TRUE)
+plot.annual_balance <- autoplot(par.bank, contour = TRUE)
+
+grid.arrange(plot.age,plot.job,plot.marital,plot.education,plot.annual_balance)
+```
+
+
+
+Unfortunately, Partial Dependence Plot shows that nearly all major consumer attributes contribute to the final decision making of the random forest in a positive way. Thus it is difficult to determine what actually contributes to the results of the forrest. However, 
+
+
+
+
+
+4.For a marketing campaign, targeting the right people is important but obviously in the data we were provided, we can see that previous campaign success and duration matters as well.
 ```
